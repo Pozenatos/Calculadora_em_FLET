@@ -77,12 +77,3 @@ Por favor, siga as boas práticas de desenvolvimento e commit.
 ## 📄 Licença
 
 Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
-## 📧 Contato
-
-Se tiver alguma dúvida ou sugestão, pode entrar em contato:
-
-* **Seu Nome/Pseudônimo:** [Link para seu GitHub](https://github.com/Pozenatos)
-* **Email:** [seu_email@example.com](mailto:seu_email@example.com)
-
----
