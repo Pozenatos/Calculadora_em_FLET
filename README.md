@@ -1,7 +1,7 @@
 
 # Calculadora em Flet
 
-![Logo do Flet](https://flet.dev/img/flet-logo-white.svg) Uma calculadora simples e funcional desenvolvida em Python utilizando o framework Flet para interface gráfica. Este projeto demonstra as capacidades básicas do Flet para criar aplicações desktop e web com uma única base de código Python.
+Uma calculadora simples e funcional desenvolvida em Python utilizando o framework Flet para interface gráfica. Este projeto demonstra as capacidades básicas do Flet para criar aplicações desktop e web com uma única base de código Python.
 
 ## 🚀 Funcionalidades
 
@@ -48,9 +48,9 @@ Certifique-se de ter o Python 3.7+ instalado.
 
 3.  **Instale as dependências:**
     ```bash
-    pip install -r requirements.txt
+    pip install flet
     ```
-    *(Caso não tenha um `requirements.txt`, você pode criar um com `pip freeze > requirements.txt` ou simplesmente instalar `pip install flet`)*
+    
 
 ### Execução
 
