@@ -10,7 +10,9 @@ Uma calculadora simples e funcional desenvolvida em Python utilizando o framewor
 * **Responsividade:** Adapta-se a diferentes tamanhos de tela (característica do Flet).
 * **Limpar e Deletar:** Botões para limpar a entrada (`C`) e para apagar o último caractere (`DEL`).
 
+
 <img width="398" height="679" alt="image_calc" src="https://github.com/user-attachments/assets/fa0b5518-6fb9-4f60-aa3d-3ea84f6bc108" />
+
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -44,7 +46,7 @@ Certifique-se de ter o Python 3.7+ instalado.
 
 3.  **Instale as dependências:**
     ```bash
-    pip install flet
+    pip install 'flet[all]'
     ```
     
 
