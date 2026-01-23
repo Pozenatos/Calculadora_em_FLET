@@ -2,21 +2,18 @@ import flet as ft
 import math as mat
 
 def main(page: ft.Page):
-
-    page.window.width = 360
-    page.window.height = 640
-    page.expand=True
+    # Configurações da Janela (atualizadas para 0.80+)
+    page.window_width = 360
+    page.window_height = 640
     page.window_resizable = False 
-    page.padding=0
-    page.bgcolor="black"
+    page.expand = True
+    page.padding = 0
+    page.bgcolor = "black"
 
     page.theme = ft.Theme(
         text_theme=ft.TextTheme(
-            
             body_medium=ft.TextStyle(size=20, color="white"), 
-           
             label_large=ft.TextStyle(size=20, weight=ft.FontWeight.BOLD),
-            
             title_medium=ft.TextStyle(size=12)
         )
     )
@@ -35,7 +32,6 @@ def main(page: ft.Page):
     def digito0(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "0"
@@ -46,7 +42,6 @@ def main(page: ft.Page):
     def digito1(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "1"
@@ -57,7 +52,6 @@ def main(page: ft.Page):
     def digito2(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "2"
@@ -68,7 +62,6 @@ def main(page: ft.Page):
     def digito3(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "3"
@@ -79,7 +72,6 @@ def main(page: ft.Page):
     def digito4(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "4"
@@ -90,7 +82,6 @@ def main(page: ft.Page):
     def digito5(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "5"
@@ -101,7 +92,6 @@ def main(page: ft.Page):
     def digito6(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "6"
@@ -112,7 +102,6 @@ def main(page: ft.Page):
     def digito7(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "7"
@@ -123,7 +112,6 @@ def main(page: ft.Page):
     def digito8(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "8"
@@ -134,7 +122,6 @@ def main(page: ft.Page):
     def digito9(e):
         if len (texto_visor.value) == 12:
             return
-
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "9"
@@ -144,10 +131,8 @@ def main(page: ft.Page):
     
     def apagar(e):
         valor_atual = str(texto_visor.value)
-
         if len(valor_atual) > 1:
             texto_visor.value = valor_atual[:-1]
-        
         else:
             texto_visor.value = "0"
         texto_visor.update()
@@ -159,66 +144,51 @@ def main(page: ft.Page):
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
             texto_visor.value = "0"
-        elif valor_atual[-1] == "+" or  valor_atual[-1] == "-" or  valor_atual[-1] == "×" or valor_atual[-1] == "÷":
+        elif valor_atual[-1] in ["+", "-", "×", "÷"]:
             return
-
         else:
-            if "," in valor_atual:
+            if "," in valor_atual: 
                 return
             else:
                 texto_visor.value = valor_atual + "," 
-
         texto_visor.update() 
     
     def soma(e):
         valor_atual = str(texto_visor.value)
-
-        if valor_atual[-1] == "+" or  valor_atual[-1] == "-" or  valor_atual[-1] == "×" or valor_atual[-1] == "÷":
+        if valor_atual[-1] in ["+", "-", "×", "÷"]:
             return
-        
         else:
             texto_visor.value = valor_atual + "+"
-
         valores_armazenados.append(valor_atual)
-
         texto_visor.update()
 
     def subtrair(e):
         valor_atual = str(texto_visor.value)
-
         if valor_atual == "0":
             texto_visor.value = "-" 
-        elif valor_atual[-1] == "-" or  valor_atual[-1] == "+" or  valor_atual[-1] == "×" or valor_atual[-1] == "÷":
+        elif valor_atual[-1] in ["-", "+", "×", "÷"]:
             return
         else:
             texto_visor.value = valor_atual + "-"
-
         valores_armazenados.append(valor_atual)
-
         texto_visor.update()
     
     def multiplicar(e):
         valor_atual = str(texto_visor.value)
-
-        if valor_atual[-1] == "×" or valor_atual[-1] == "-" or  valor_atual[-1] == "+" or valor_atual[-1] == "÷": 
+        if valor_atual[-1] in ["×", "-", "+", "÷"]: 
             return
         else:
             texto_visor.value = valor_atual + "×"
-
         valores_armazenados.append(valor_atual)
-
         texto_visor.update()
     
     def dividir(e):
         valor_atual = str(texto_visor.value)
-
-        if valor_atual[-1] == "÷" or  valor_atual[-1] == "-" or  valor_atual[-1] == "+" or valor_atual[-1] == "×":
+        if valor_atual[-1] in ["÷", "-", "+", "×"]:
             return
         else:
-            texto_visor.value = valor_atual + "×"
-
+            texto_visor.value = valor_atual + "÷"
         valores_armazenados.append(valor_atual)
-
         texto_visor.update()
         
     visor = ft.Container( 
@@ -226,7 +196,7 @@ def main(page: ft.Page):
         bgcolor="black",
         width=float("inf"),
         expand=2,
-        alignment=ft.alignment.bottom_right,
+        alignment=ft.Alignment(1, 1), 
     )
 
     teclado = ft.Container(
@@ -239,54 +209,46 @@ def main(page: ft.Page):
                             ft.Container( #Primeira Linha
                                 ft.Text("C", color="#FF8400", size=30 ),
                                 border_radius = 100,
-                                alignment=ft.alignment.center,
+                                alignment=ft.Alignment(0, 0),
                                 ink=True,
                                 expand=1,
-
                                 on_click = limpar_tudo
-                                
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("7", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                      on_click = digito7
                             ),
                             ft.Container( #Terceira Linha
                                     ft.Text("4", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito4
                             ),
                             ft.Container( #Quarta Linha
                                     ft.Text("1", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,     
                                     expand=1,
-
                                     on_click = digito1
                             ),
                             ft.Container( #Quinta Linha
                                     ft.Text("⌫", color="#FF8400", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = apagar
                             ),
-
                         ]
                     ),
                     expand=1
-                    
                 ),
                 ft.Container( # Segunda Coluna
                     ft.Column(
@@ -294,47 +256,41 @@ def main(page: ft.Page):
                             ft.Container( #Primeira Linha
                                 ft.Text("√", color="#FF8400", size=30, weight="bold" ),
                                 border_radius = 100,
-                                alignment=ft.alignment.center,
+                                alignment=ft.Alignment(0, 0),
                                 ink=True,expand=1,
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("8", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = digito8
                             ),
                             ft.Container( #Terceira Linha
                                     ft.Text("5", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito5
                             ),
                             ft.Container( #Quarta Linha
                                     ft.Text("2", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito2
                             ),
                             ft.Container( #Quinta Linha
                                     ft.Text("0", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito0
                             ),
-                            
-
                         ]
                     ),
                     expand=1
@@ -345,47 +301,42 @@ def main(page: ft.Page):
                             ft.Container( #Primeira Linha
                                 ft.Text("%", color="#FF8400", size=30, weight="bold" ),
                                 border_radius = 100,
-                                alignment=ft.alignment.center,
+                                alignment=ft.Alignment(0, 0),
                                 ink=True,
                                 expand=1,
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("9", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito9
                             ),
                             ft.Container( #Terceira Linha
                                     ft.Text("6", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = digito6  
                             ),
                             ft.Container( #Quarta Linha
                                     ft.Text("3", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = digito3
                             ),
                             ft.Container( #Quinta Linha
                                     ft.Text(",", color="white", size=30 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
-
                                     on_click = digito_virgula
                             ),
-
                         ]
                     ),
                     expand=1
@@ -396,44 +347,40 @@ def main(page: ft.Page):
                             ft.Container( #Primeira Linha
                                 ft.Text("÷", color="#FF8400", size=40 ),
                                 border_radius = 100,
-                                alignment=ft.alignment.center,
+                                alignment=ft.Alignment(0, 0),
                                 ink=True,
                                 expand=1,
-
                                 on_click = dividir
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("×", color="#FF8400", size=40 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = multiplicar
                             ),
                             ft.Container( #Terceira Linha
                                     ft.Text("-", color="#FF8400", size=40 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = subtrair
                             ),
                             ft.Container( #Quarta Linha
                                     ft.Text("+", color="#FF8400", size=40 ),
                                     border_radius = 100,
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,   
                                     expand=1,
-
                                     on_click = soma
                             ),
                             ft.Container( #Quinta Linha
                                     ft.Text("=", color="white", size=40 ),
                                     border_radius = 40,
                                     bgcolor="#FF931F",
-                                    alignment=ft.alignment.center,
+                                    alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
                             ),
@@ -447,8 +394,6 @@ def main(page: ft.Page):
         bgcolor='black',
         padding=25,
         expand=3
-        
-
     )
 
     page.add(
@@ -458,7 +403,6 @@ def main(page: ft.Page):
             controls=[visor,teclado]
         )
     )
-
     page.update()
 
-ft.app(target=main)
+ft.run(main)
