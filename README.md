@@ -10,11 +10,7 @@ Uma calculadora simples e funcional desenvolvida em Python utilizando o framewor
 * **Responsividade:** Adapta-se a diferentes tamanhos de tela (característica do Flet).
 * **Limpar e Deletar:** Botões para limpar a entrada (`C`) e para apagar o último caractere (`DEL`).
 
-## ✨ Screenshots
-
-Aqui é onde você pode colocar uma imagem ou GIF da sua calculadora em funcionamento. Por exemplo:
-![Screenshot da Calculadora](caminho/para/sua/imagem.png)
-*(Se você quiser que eu gere uma imagem de uma calculadora simples com Flet para você usar como placeholder, me avise!)*
+<img width="398" height="679" alt="image_calc" src="https://github.com/user-attachments/assets/fa0b5518-6fb9-4f60-aa3d-3ea84f6bc108" />
 
 ## 🛠️ Tecnologias Utilizadas
 
