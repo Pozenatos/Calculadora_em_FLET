@@ -143,7 +143,7 @@ def main(page: ft.Page):
         
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
-            texto_visor.value = "0"
+            return
         elif valor_atual[-1] in ["+", "-", "×", "÷"]:
             return
         else:
@@ -190,9 +190,26 @@ def main(page: ft.Page):
             texto_visor.value = valor_atual + "÷"
         valores_armazenados.append(valor_atual)
         texto_visor.update()
+
+    def porcentagem(e):
+        valor_atual = str(texto_visor.value)
+
+    def calcular(e):
+        try:
+            conta = texto_visor.value.replace("×", "*").replace("÷", "/").replace(",", ".")
+            
+            resultado = eval(conta)
+            
+            texto_visor.value = str(round(resultado, 4)).replace(".", ",")
+        except:
+            texto_visor.value = "Erro"
+    
+        texto_visor.update()
+        
         
     visor = ft.Container( 
         texto_visor,
+        padding=ft.padding.only(right=25),
         bgcolor="black",
         width=float("inf"),
         expand=2,
@@ -383,6 +400,7 @@ def main(page: ft.Page):
                                     alignment=ft.Alignment(0, 0),
                                     ink=True,    
                                     expand=1,
+                                    on_click = calcular
                             ),
                         ]
                     ),
