@@ -1,8 +1,8 @@
 import flet as ft
 import math as mat
+import re
 
 def main(page: ft.Page):
-    # Configurações da Janela (atualizadas para 0.80+)
     page.window_width = 360
     page.window_height = 640
     page.window_resizable = False 
@@ -22,7 +22,7 @@ def main(page: ft.Page):
     
     texto_visor = ft.Text(
         str("0"),
-        size=60,
+        size=40,
     )
 
     def limpar_tudo(e):
@@ -30,7 +30,7 @@ def main(page: ft.Page):
         texto_visor.update()
     
     def digito0(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -40,7 +40,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito1(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -50,7 +50,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito2(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -60,7 +60,7 @@ def main(page: ft.Page):
         texto_visor.update()
     
     def digito3(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -70,7 +70,7 @@ def main(page: ft.Page):
         texto_visor.update()
     
     def digito4(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -80,7 +80,7 @@ def main(page: ft.Page):
         texto_visor.update()
     
     def digito5(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -90,7 +90,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito6(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -100,7 +100,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito7(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -110,7 +110,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito8(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -120,7 +120,7 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito9(e):
-        if len (texto_visor.value) == 12:
+        if len (texto_visor.value) == 20:
             return
         valor_atual = str(texto_visor.value)
         if valor_atual == "0":
@@ -138,19 +138,28 @@ def main(page: ft.Page):
         texto_visor.update()
 
     def digito_virgula(e):
-        if len (texto_visor.value) == 12:
+        if len(texto_visor.value) >= 12:
             return
         
         valor_atual = str(texto_visor.value)
-        if valor_atual == "0":
+        
+        if valor_atual[-1] in ["+", "-", "×", "÷"]:
+            texto_visor.value = valor_atual + "0,"
+            texto_visor.update()
             return
-        elif valor_atual[-1] in ["+", "-", "×", "÷"]:
-            return
-        else:
-            if "," in valor_atual: 
-                return
-            else:
-                texto_visor.value = valor_atual + "," 
+
+        ultimo_operador = -1
+        for op in ["+", "-", "×", "÷"]:
+            posicao = valor_atual.rfind(op)
+            if posicao > ultimo_operador:
+                ultimo_operador = posicao
+        
+        
+        ultimo_bloco_numeral = valor_atual[ultimo_operador + 1:]
+        
+        if "," not in ultimo_bloco_numeral:
+            texto_visor.value = valor_atual + ","
+            
         texto_visor.update() 
     
     def soma(e):
@@ -191,17 +200,40 @@ def main(page: ft.Page):
         valores_armazenados.append(valor_atual)
         texto_visor.update()
 
-    def porcentagem(e):
+    def elevar_ao_quadrado(e):
         valor_atual = str(texto_visor.value)
+        if valor_atual == "0" or valor_atual[-1] in ["+", "-", "×", "÷", "²", "!"]:
+            return
+        else:
+            texto_visor.value = valor_atual + "²"
+        texto_visor.update()
+
+    def calcular_fatorial(e):
+        valor_atual = str(texto_visor.value)
+        if valor_atual[-1].isdigit():
+            texto_visor.value = valor_atual + "!"
+        texto_visor.update()
 
     def calcular(e):
         try:
-            conta = texto_visor.value.replace("×", "*").replace("÷", "/").replace(",", ".")
+            conta = texto_visor.value
+            
+            conta = conta.replace("²", "**2")
+            
+            conta = re.sub(r'(\d+)!', r'mat.factorial(\1)', conta)
+            
+            conta = conta.replace("×", "*").replace("÷", "/").replace(",", ".")
+            
+            abertos = conta.count("(")
+            fechados = conta.count(")")
+            if abertos > fechados:
+                conta += ")" * (abertos - fechados)
             
             resultado = eval(conta)
             
             texto_visor.value = str(round(resultado, 4)).replace(".", ",")
-        except:
+        except Exception as err:
+            print(f"Erro: {err}") 
             texto_visor.value = "Erro"
     
         texto_visor.update()
@@ -209,7 +241,7 @@ def main(page: ft.Page):
         
     visor = ft.Container( 
         texto_visor,
-        padding=ft.padding.only(right=25),
+        padding=ft.Padding.only(right=25),
         bgcolor="black",
         width=float("inf"),
         expand=2,
@@ -271,10 +303,12 @@ def main(page: ft.Page):
                     ft.Column(
                         controls=[
                             ft.Container( #Primeira Linha
-                                ft.Text("√", color="#FF8400", size=30, weight="bold" ),
+                                ft.Text("x!", color="#FF8400", size=30, weight="bold" ),
                                 border_radius = 100,
                                 alignment=ft.Alignment(0, 0),
                                 ink=True,expand=1,
+                                on_click=calcular_fatorial
+                                
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("8", color="white", size=30 ),
@@ -316,11 +350,12 @@ def main(page: ft.Page):
                     ft.Column(
                         controls=[
                             ft.Container( #Primeira Linha
-                                ft.Text("%", color="#FF8400", size=30, weight="bold" ),
+                                ft.Text("x²", color="#FF8400", size=30, weight="bold" ),
                                 border_radius = 100,
                                 alignment=ft.Alignment(0, 0),
                                 ink=True,
                                 expand=1,
+                                on_click=elevar_ao_quadrado
                             ),
                             ft.Container( #Segunda Linha
                                     ft.Text("9", color="white", size=30 ),
