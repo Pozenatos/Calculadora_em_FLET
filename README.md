@@ -11,7 +11,7 @@ Uma calculadora simples e funcional desenvolvida em Python utilizando o framewor
 * **Limpar e Deletar:** Botões para limpar a entrada (`C`) e para apagar o último caractere (`DEL`).
 
 
-<img width="398" height="679" alt="image_calc" src="https://github.com/user-attachments/assets/fa0b5518-6fb9-4f60-aa3d-3ea84f6bc108" />
+![Texto Alternativo](img/image_calc.png)
 
 
 ## 🛠️ Tecnologias Utilizadas
